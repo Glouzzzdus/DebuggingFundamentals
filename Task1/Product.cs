@@ -1,9 +1,12 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Runtime;
+using System.Diagnostics;
 using System.Xml.Linq;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Task1
 {
-    public class Product
+    public class Product : IEquatable<Product>
     {
         public Product(string name, double price)
         {
@@ -15,18 +18,13 @@ namespace Task1
 
         public double Price { get; set; }
 
-        public override bool Equals(object obj)
+        public bool Equals(Product otherProduct)
         {
-            if (obj is Product otherProduct)
+            if (otherProduct != null)
             {
                 return Name == otherProduct.Name && Price == otherProduct.Price;
             }
             return false;
-        }
-
-        public override int GetHashCode()
-        {
-            return (Name, Price).GetHashCode();
         }
     }    
 }
